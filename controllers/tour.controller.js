@@ -1,4 +1,6 @@
 const tourModel = require("../models/tour.model");
+const orderModel = require("../models/order.model");
+const commentModel = require("../models/comment.model");
 
 module.exports = {
   create: async (req, res) => {
@@ -30,9 +32,23 @@ module.exports = {
       let data = await tourModel
         .findById(req.params.id)
         .select(["-updatedAt", "-createdAt"]);
-      return res
-        .status(200)
-        .json({ message: "Lấy thông tin tour thành công", data });
+
+      const feedback = await commentModel
+        .find({ tour: req.params.id })
+        .populate("user");
+
+      const rating = feedback.reduce((total, comment) => {
+        return total + comment.rating;
+      }, 0);
+
+      return res.status(200).json({
+        message: "Lấy thông tin tour thành công",
+        data: {
+          ...data.toObject(),
+          feedback,
+          rating: rating / feedback.length,
+        },
+      });
     } catch (error) {
       throw error;
     }
