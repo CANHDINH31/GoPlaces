@@ -3,6 +3,7 @@ const userRouter = require("./user.router");
 const tourRouter = require("./tour.router");
 const orderRouter = require("./order.router");
 const commentRouter = require("./comment.router");
+const hotelRouter = require("./hotel.router");
 
 const errorHandle = require("../middlewares/errorHandle");
 
@@ -12,6 +13,7 @@ module.exports = (app) => {
   app.use("/api/tour", tourRouter);
   app.use("/api/order", orderRouter);
   app.use("/api/comment", commentRouter);
+  app.use("/api/hotel", hotelRouter);
 
   app.use(errorHandle);
 };
