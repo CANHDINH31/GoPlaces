@@ -1,5 +1,4 @@
 const tourModel = require("../models/tour.model");
-const orderModel = require("../models/order.model");
 const commentModel = require("../models/comment.model");
 
 module.exports = {
@@ -17,7 +16,31 @@ module.exports = {
 
   list: async (req, res) => {
     try {
-      const data = await tourModel.find({});
+      let query = {};
+
+      query = {
+        ...(req?.query?.type && { type: req.query.type }),
+        ...(req?.query?.name && {
+          name: { $regex: req.query.name, $options: "i" },
+        }),
+      };
+
+      const tours = await tourModel.find(query);
+      const data = [];
+      for (const tour of tours) {
+        const tourId = tour._id;
+        const feedback = await commentModel.find({ tour: tourId });
+
+        const totalRating = feedback.reduce((total, comment) => {
+          return total + comment.rating;
+        }, 0);
+
+        const rating = totalRating / feedback?.length;
+
+        if (rating) data.push({ ...tour.toObject(), rating });
+        data.push({ ...tour.toObject() });
+      }
+
       return res
         .status(201)
         .json({ message: "Lấy danh sách tour du lịch thành công", data });
