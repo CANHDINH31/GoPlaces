@@ -28,7 +28,7 @@ const tourSchema = mongoose.Schema(
     },
 
     type: {
-      type: String,
+      type: Number,
     },
 
     time: {
