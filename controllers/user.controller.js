@@ -5,11 +5,13 @@ const nodemailer = require("nodemailer");
 module.exports = {
   list: async (req, res) => {
     try {
-      let user = await userModel
+      let data = await userModel
         .find({})
         .select(["-updatedAt", "-createdAt"])
         .sort({ createdAt: -1 });
-      return res.status(200).json(user);
+      return res
+        .status(200)
+        .json({ message: "Lấy danh sách user thành công", data });
     } catch (error) {
       throw error;
     }
@@ -17,10 +19,12 @@ module.exports = {
 
   findUser: async (req, res) => {
     try {
-      let user = await userModel
+      let data = await userModel
         .findById(req.params.id)
         .select(["-updatedAt", "-createdAt"]);
-      return res.status(200).json(user);
+      return res
+        .status(200)
+        .json({ message: "Lấy thông tin user thành công", data });
     } catch (error) {
       throw error;
     }
@@ -28,11 +32,17 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      await userModel.findByIdAndUpdate(req.params.id, {
-        ...req.body,
-      });
-      const user = await userModel.findById(req.params.id);
-      res.status(201).json(user);
+      const data = await userModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+        },
+        { new: true }
+      );
+
+      res
+        .status(201)
+        .json({ message: "Cập nhật thông tin user thành công", data });
     } catch (error) {
       throw error;
     }
