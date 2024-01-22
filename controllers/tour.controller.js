@@ -28,7 +28,7 @@ module.exports = {
         }),
       };
 
-      const tours = await tourModel.find(query);
+      const tours = await tourModel.find(query).sort({ createdAt: -1 });
       const data = [];
       for (const tour of tours) {
         const tourId = tour._id;
