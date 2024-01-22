@@ -2,7 +2,19 @@ const mongoose = require("mongoose");
 
 const busSchema = mongoose.Schema(
   {
-    url: {
+    url1: {
+      type: String,
+    },
+
+    url2: {
+      type: String,
+    },
+
+    url3: {
+      type: String,
+    },
+
+    url4: {
       type: String,
     },
 
