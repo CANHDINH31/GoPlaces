@@ -5,6 +5,7 @@ const orderRouter = require("./order.router");
 const commentRouter = require("./comment.router");
 const hotelRouter = require("./hotel.router");
 const busRouter = require("./bus.router");
+const foodRouter = require("./food.router");
 
 const errorHandle = require("../middlewares/errorHandle");
 
@@ -16,6 +17,7 @@ module.exports = (app) => {
   app.use("/api/comment", commentRouter);
   app.use("/api/hotel", hotelRouter);
   app.use("/api/bus", busRouter);
+  app.use("/api/food", foodRouter);
 
   app.use(errorHandle);
 };
