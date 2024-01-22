@@ -19,6 +19,9 @@ module.exports = {
 
       query = {
         ...(req?.query?.type && { type: req.query.type }),
+        ...(req?.query?.address && {
+          address: { $regex: req.query.address, $options: "i" },
+        }),
         ...(req?.query?.name && {
           name: { $regex: req.query.name, $options: "i" },
         }),
