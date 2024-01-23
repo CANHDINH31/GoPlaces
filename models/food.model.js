@@ -27,6 +27,10 @@ const foodSchema = mongoose.Schema(
       type: String,
     },
 
+    type: {
+      type: String,
+    },
+
     time: {
       type: String,
     },
