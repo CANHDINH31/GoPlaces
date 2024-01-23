@@ -62,6 +62,10 @@ const tourSchema = mongoose.Schema(
     priceC: {
       type: Number,
     },
+
+    schedule: {
+      type: String,
+    },
   },
   {
     timestamps: true,
