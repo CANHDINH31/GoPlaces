@@ -34,6 +34,16 @@ const userSchema = mongoose.Schema(
       default: 0,
     },
 
+    // 0:Block 1:Active
+    isBlock: {
+      type: Number,
+      default: 0,
+    },
+
+    reasonBlock: {
+      type: String,
+    },
+
     tour: [{ type: mongoose.Schema.Types.ObjectId, ref: "tour" }],
 
     food: [{ type: mongoose.Schema.Types.ObjectId, ref: "food" }],
