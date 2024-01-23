@@ -33,6 +33,14 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+
+    tour: [{ type: mongoose.Schema.Types.ObjectId, ref: "tour" }],
+
+    food: [{ type: mongoose.Schema.Types.ObjectId, ref: "food" }],
+
+    hotel: [{ type: mongoose.Schema.Types.ObjectId, ref: "hotel" }],
+
+    bus: [{ type: mongoose.Schema.Types.ObjectId, ref: "bus" }],
   },
   {
     timestamps: true,

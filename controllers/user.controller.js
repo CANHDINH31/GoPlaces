@@ -8,6 +8,10 @@ module.exports = {
       let data = await userModel
         .find({})
         .select(["-updatedAt", "-createdAt"])
+        .populate("tour")
+        .populate("food")
+        .populate("hotel")
+        .populate("bus")
         .sort({ createdAt: -1 });
       return res
         .status(200)
@@ -21,6 +25,10 @@ module.exports = {
     try {
       let data = await userModel
         .findById(req.params.id)
+        .populate("tour")
+        .populate("food")
+        .populate("hotel")
+        .populate("bus")
         .select(["-updatedAt", "-createdAt"]);
       return res
         .status(200)
