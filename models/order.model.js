@@ -7,7 +7,7 @@ const orderSchema = mongoose.Schema(
     numberPriceA: {
       type: Number,
     },
-    numberPriceB: {
+    numberPriceC: {
       type: Number,
     },
   },

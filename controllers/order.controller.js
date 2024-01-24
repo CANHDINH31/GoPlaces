@@ -13,7 +13,19 @@ module.exports = {
 
   list: async (req, res) => {
     try {
-      const data = await orderModel.find({}).populate("user").populate("tour");
+      let query = {};
+
+      query = {
+        ...(req?.query?.tour && { tour: req.query.tour }),
+      };
+
+      const data = await orderModel
+        .find(query)
+        .populate("user")
+        .populate("tour");
+
+      console.log(query);
+
       return res
         .status(201)
         .json({ message: "Lấy thông tin order thành công", data });
